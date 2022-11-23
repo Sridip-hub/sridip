@@ -4,6 +4,7 @@ const express = require("express");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const fileUpload = require("express-fileupload");
+const mongoStore = require("connect-mongo");
 const expressSession = require("express-session");
 const flash = require("connect-flash");
 const customValidate = require("./middlewares/customValidate");
@@ -31,6 +32,7 @@ app.use(
     secret: "ssaha011",
     resave: false,
     saveUninitialized: true,
+    store: mongoStore.create({ mongoUrl: process.env.MONGO_URL }),
   })
 );
 app.use("*", loggedIn);
